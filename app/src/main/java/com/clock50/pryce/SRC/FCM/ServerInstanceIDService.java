@@ -2,9 +2,9 @@ package com.clock50.pryce.SRC.FCM;
 
 import android.content.Context;
 
+import com.clock50.pryce.SRC.managers.LoginManager;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.clock50.pryce.SRC.managers.LoginManager;
 
 public class ServerInstanceIDService extends FirebaseInstanceIdService {
 

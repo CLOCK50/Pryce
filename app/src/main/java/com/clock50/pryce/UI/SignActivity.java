@@ -20,6 +20,7 @@ import com.clock50.pryce.SRC.managers.LoginManager;
 
 public class SignActivity extends AppCompatActivity {
 
+
     /* ************************************************************************* *
      *                                                                           *
      * Instance Variables                                                        *
@@ -35,19 +36,33 @@ public class SignActivity extends AppCompatActivity {
     /** The label on the 'Sign' button. */
     private TextView lbl_sign;
 
+    /** Text label to display an error */
     private TextView lbl_error;
 
+    /** Text field for the email */
     private EditText txtfld_email;
 
+    /** Text field for the password */
     private EditText txtfld_password;
 
+    /** The button used to sign the user in */
     private ImageView btn_sign;
 
+    /** Progress bar display on top of the button while signing the user in */
     private ProgressBar pbar_sign;
 
+    /** The type of sign the user is attempting to do (ie. SIGN UP or SIGN IN)*/
     private SignType sign_type;
 
+    /** Checkbox indicating to keep the user signed in if checked */
     private CheckBox check_box_sign;
+
+
+    /* ************************************************************************* *
+     *                                                                           *
+     * Constructors                                                              *
+     *                                                                           *
+     * ************************************************************************* */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

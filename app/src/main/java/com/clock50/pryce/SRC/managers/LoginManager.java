@@ -5,9 +5,9 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import com.clock50.pryce.SRC.PostRequest;
 import com.google.common.hash.Hashing;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.clock50.pryce.SRC.PostRequest;
 
 import java.nio.charset.Charset;
 import java.util.HashMap;

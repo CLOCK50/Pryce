@@ -10,13 +10,17 @@ public class BrowserManager {
 
 
 
+    /* ************************************************************************* *
+     *                                                                           *
+     * Instance Methods                                                          *
+     *                                                                           *
+     * ************************************************************************* */
+
     //TODO: live verification checkbox beside edittext
     public void getInfo(String url){
         //Detect string,
         String domain = getValidDomain(url);
-        if(!url.matches("http://.*")){
-            url = "http://" + url;
-        }
+
         domain = "Amazon"; // TODO: REMOVE AFTER DEBUG
         switch (domain){
             case "Amazon":

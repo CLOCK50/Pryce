@@ -1,6 +1,8 @@
 package com.clock50.pryce.SRC.managers;
 
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 /**
  * Created by pc on 2017-09-02.
@@ -8,6 +10,25 @@ import android.util.Log;
 
 public class BrowserManager {
 
+    /* ************************************************************************* *
+     *                                                                           *
+     * Instance Variables                                                        *
+     *                                                                           *
+     * ************************************************************************* */
+
+    private Button btn_price_alert;
+    private ProgressBar progressbar_alerts;
+
+    /* ************************************************************************* *
+     *                                                                           *
+     * Constructors                                                              *
+     *                                                                           *
+     * ************************************************************************* */
+
+    public void construct(Button btn_price_alert, ProgressBar progressbar_alerts){
+        this.btn_price_alert = btn_price_alert;
+        this.progressbar_alerts = progressbar_alerts;
+    }
 
 
     /* ************************************************************************* *
@@ -24,7 +45,7 @@ public class BrowserManager {
         domain = "Amazon"; // TODO: REMOVE AFTER DEBUG
         switch (domain){
             case "Amazon":
-                Log.i("COS", "AMAOZN");
+                Log.i("COS", "AMAZON");
                 Extractor.getInstance().extractAmazon(url);
                 break;
 

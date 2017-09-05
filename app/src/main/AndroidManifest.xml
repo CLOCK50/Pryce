@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.SignActivity"></activity>
+        <activity android:name=".UI.SignActivity" />
+        <activity android:name=".UI.AlertListActivity"></activity>
     </application>
 
 </manifest>

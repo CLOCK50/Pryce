@@ -135,6 +135,7 @@ public class Home extends AppCompatActivity {
         BrowserManager.getInstance().getInfo(url);
 
 
+
     }
 
     public void onTabAlertsClick(View view){

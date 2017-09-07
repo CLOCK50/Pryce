@@ -86,6 +86,7 @@ public class Extractor {
                 priceAlerts.add(new PriceAlert(name, price, ""));
                 progressbar_alerts.setVisibility(View.INVISIBLE);
                 btn_price_alert.setText("CREATE PRICE ALERT");
+                //
 
             }
         }).execute();

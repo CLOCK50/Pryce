@@ -46,6 +46,7 @@ public class PriceAlertAdaptor extends ArrayAdapter<PriceAlert> {
     @Override
     public void insert(@Nullable PriceAlert object, int index) {
         super.insert(object, index);
+        //
     }
 }
 

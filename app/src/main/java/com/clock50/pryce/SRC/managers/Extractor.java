@@ -83,7 +83,7 @@ public class Extractor {
 
             @Override
             protected void onPostExecute(Void voids) {
-                priceAlerts.add(new PriceAlert(name, price, ""));
+                priceAlerts.add(new PriceAlert(name, price, "$15.99"));
                 progressbar_alerts.setVisibility(View.INVISIBLE);
                 btn_price_alert.setText("CREATE PRICE ALERT");
                 //

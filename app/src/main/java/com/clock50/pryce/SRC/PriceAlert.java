@@ -6,6 +6,7 @@ package com.clock50.pryce.SRC;
 
 public class PriceAlert {
 
+    //
     private String name;
     private String price;
     private String target_price;

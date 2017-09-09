@@ -76,6 +76,7 @@ public class SignActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_sign);
         initializeViews();
+        //
     }
 
 

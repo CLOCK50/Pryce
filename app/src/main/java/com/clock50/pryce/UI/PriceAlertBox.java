@@ -39,6 +39,7 @@ public class PriceAlertBox extends DialogFragment {
 //                        LoginDialogFragment.this.getDialog().cancel();
                     }
                 });
+        //
         return builder.create();
     }
 }

@@ -141,5 +141,6 @@ public class Home extends AppCompatActivity {
     public void onTabAlertsClick(View view){
         Intent intent = new Intent(this, AlertListActivity.class);
         startActivity(intent);
+        //
     }
 }

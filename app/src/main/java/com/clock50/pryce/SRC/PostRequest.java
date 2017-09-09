@@ -30,6 +30,7 @@ public class PostRequest {
     public interface PostResponse {
         /** Called on the normal response from the server. */
         void onServerResponse(String response);
+        //
     }
 
 

@@ -27,6 +27,7 @@ public class AlertListActivity extends AppCompatActivity {
 
         for(PriceAlert priceAlert: Extractor.priceAlerts){
             adaptor.insert(priceAlert, 0);
+            //
         }
     }
 }

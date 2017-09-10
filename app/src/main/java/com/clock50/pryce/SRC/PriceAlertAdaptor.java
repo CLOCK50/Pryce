@@ -1,7 +1,6 @@
 package com.clock50.pryce.SRC;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,33 +11,41 @@ import android.widget.TextView;
 
 import com.clock50.pryce.R;
 
-import java.util.LinkedHashMap;
-
-/**
- * Created by pc on 2017-09-05.
- */
 
 public class PriceAlertAdaptor extends ArrayAdapter<PriceAlert> {
 
-    public static LinkedHashMap<PriceAlert, String> postMap = new LinkedHashMap<>();
+    //public static LinkedHashMap<PriceAlert, String> postMap = new LinkedHashMap<>();
+
+    /* ************************************************************************* *
+     *                                                                           *
+     * Constructors                                                              *
+     *                                                                           *
+     * ************************************************************************* */
 
     public PriceAlertAdaptor(@NonNull Context context) {
         super(context, R.layout.list_item);
     }
 
+
+    /* ************************************************************************* *
+     *                                                                           *
+     * Instance Methods                                                          *
+     *                                                                           *
+     * ************************************************************************* */
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater shahmirsInflater = LayoutInflater.from(getContext());
-        View customView = shahmirsInflater.inflate(R.layout.list_item, parent, false);
+        LayoutInflater layout_inflater = LayoutInflater.from(getContext());
+        View customView = layout_inflater.inflate(R.layout.list_item, parent, false);
 
         PriceAlert singePostItem = getItem(position);
-        TextView tt = (TextView) customView.findViewById(R.id.toptext);
-        TextView tt2 = (TextView) customView.findViewById(R.id.toptext2);
-        TextView mt = (TextView) customView.findViewById(R.id.middletext);
+        TextView list_text_top = (TextView) customView.findViewById(R.id.list_text_top);
+        TextView list_txt_middle = (TextView) customView.findViewById(R.id.list_txt_middle);
+        TextView list_txt_bottom = (TextView) customView.findViewById(R.id.list_txt_bottom);
 
-        tt.setText(singePostItem.getName());
-        tt2.setText(singePostItem.getPrice());
-        mt.setText(singePostItem.getTarget_price());
+        list_text_top.setText("NAME: " + singePostItem.getName());
+        list_txt_middle.setText("CURRENT PRICE: " + singePostItem.getPrice());
+        list_txt_bottom.setText("TARGET PRICE: " + singePostItem.getTarget_price());
 
         return customView;
     }

@@ -28,6 +28,7 @@ public class BrowserManager {
     public void construct(Button btn_price_alert, ProgressBar progressbar_alerts){
         this.btn_price_alert = btn_price_alert;
         this.progressbar_alerts = progressbar_alerts;
+        Extractor.getInstance().construct(btn_price_alert, progressbar_alerts);
     }
 
 

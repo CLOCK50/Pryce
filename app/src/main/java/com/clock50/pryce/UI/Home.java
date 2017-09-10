@@ -16,7 +16,6 @@ import android.widget.ProgressBar;
 
 import com.clock50.pryce.R;
 import com.clock50.pryce.SRC.managers.BrowserManager;
-import com.clock50.pryce.SRC.managers.Extractor;
 
 public class Home extends AppCompatActivity {
 
@@ -68,8 +67,6 @@ public class Home extends AppCompatActivity {
         progressbar_alerts = (ProgressBar) findViewById(R.id.progressbar_alerts);
         btn_price_alert = (Button) findViewById(R.id.btn_price_alert);
         BrowserManager.getInstance().construct(btn_price_alert, progressbar_alerts);
-        Extractor.getInstance().construct(btn_price_alert, progressbar_alerts);
-
 
         /* Setup for the text field when the user finishes editing */
         txtfld_search_bar.setOnEditorActionListener((textView, actionId, event) -> {
@@ -133,8 +130,6 @@ public class Home extends AppCompatActivity {
         progressbar_alerts.setVisibility(View.VISIBLE);
 
         BrowserManager.getInstance().getInfo(url);
-
-
 
     }
 

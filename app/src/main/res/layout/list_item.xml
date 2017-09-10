@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="65dp"
     android:orientation="vertical"
@@ -7,23 +8,26 @@
     android:padding="6dip">
 
     <TextView
-        android:id="@+id/toptext"
+        android:id="@+id/list_text_top"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:maxLines="1" />
+        android:maxLines="1"
+        tools:text="NAME: Samsung Galaxy S6" />
 
     <TextView
-        android:id="@+id/toptext2"
+        android:id="@+id/list_txt_middle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:maxLines="1" />
+        android:maxLines="1"
+        tools:text="CURRENT PRICE: $599" />
 
     <TextView
-        android:id="@+id/middletext"
+        android:id="@+id/list_txt_bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:text="TARGET PRICE: $300" />
 
 </LinearLayout>

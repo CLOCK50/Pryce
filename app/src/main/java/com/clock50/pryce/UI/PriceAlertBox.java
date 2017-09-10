@@ -1,17 +1,12 @@
 package com.clock50.pryce.UI;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.clock50.pryce.R;
-
-
-/**
- * Created by pc on 2017-09-06.
- */
 
 public class PriceAlertBox extends DialogFragment {
 

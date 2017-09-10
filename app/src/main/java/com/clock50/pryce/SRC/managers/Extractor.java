@@ -1,7 +1,5 @@
 package com.clock50.pryce.SRC.managers;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -9,7 +7,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.clock50.pryce.SRC.PriceAlert;
-import com.clock50.pryce.UI.AlertListActivity;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,11 +23,19 @@ public class Extractor {
      *                                                                           *
      * ************************************************************************* */
 
+    /** The name of the extracted product */
     private String name;
+
+    /** The price of the extracted product */
     private String price;
+
+    /** A list containing all the product price alerts */
     public static ArrayList<PriceAlert> priceAlerts = new ArrayList<>();
 
+    /** Button clicked when wanting to add a price alert (need it for UI) */
     private Button btn_price_alert;
+
+    /** Progress bar shown when extracting HTML data (need it for UI) */
     private ProgressBar progressbar_alerts;
 
 
@@ -40,6 +45,12 @@ public class Extractor {
      *                                                                           *
      * ************************************************************************* */
 
+    /**
+     * Constructs the extractor class and its instance variables.
+     *
+     * @param btn_price_alert button clicked when wanting to add a price alert (need it for UI)
+     * @param progressbar_alerts progress bar shown when extracting HTML data (need it for UI)
+     */
     public void construct(Button btn_price_alert, ProgressBar progressbar_alerts){
         this.btn_price_alert = btn_price_alert;
         this.progressbar_alerts = progressbar_alerts;
@@ -52,12 +63,16 @@ public class Extractor {
      *                                                                           *
      * ************************************************************************* */
 
-    public String extractAmazon(String url){
-
-
+    /**
+     * Extracts the HTML data from the given URL and parses the name and price of the product. Adds
+     * a PriceAlert object to the list of price alerts with an empty price. This object's information
+     * is later modified by the user in the alert box where they set the target price.
+     * Performs several UI changes.
+     *
+     * @param url the url to parse
+     */
+    public void extractAmazon(String url){
         (new AsyncTask<Void, Void, Void>(){
-
-
 
             @Override
             protected Void doInBackground(Void... voids) {
@@ -90,9 +105,6 @@ public class Extractor {
 
             }
         }).execute();
-
-
-        return url;
     }
 
 

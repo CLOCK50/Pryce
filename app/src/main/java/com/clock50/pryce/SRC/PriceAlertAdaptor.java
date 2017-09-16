@@ -1,6 +1,7 @@
 package com.clock50.pryce.SRC;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -43,9 +44,22 @@ public class PriceAlertAdaptor extends ArrayAdapter<PriceAlert> {
         TextView list_txt_middle = (TextView) customView.findViewById(R.id.list_txt_middle);
         TextView list_txt_bottom = (TextView) customView.findViewById(R.id.list_txt_bottom);
 
+        String price = singePostItem.getPrice();
+        String targetPrice = singePostItem.getTarget_price();
+
         list_text_top.setText("NAME: " + singePostItem.getName());
-        list_txt_middle.setText("CURRENT PRICE: " + singePostItem.getPrice());
-        list_txt_bottom.setText("TARGET PRICE: " + singePostItem.getTarget_price());
+        list_txt_middle.setText("CURRENT PRICE: " + price);
+        list_txt_bottom.setText("TARGET PRICE: " + targetPrice);
+
+        if(price.matches("") || targetPrice.matches("")){
+            customView.setBackgroundColor(Color.argb(100,2,3,4));
+        }
+        else if(isBelowPrice(price, targetPrice)){
+            customView.setBackgroundColor(Color.argb(100, 0, 255, 0));
+        }
+        else{
+            customView.setBackgroundColor(Color.argb(100, 255, 0, 0));
+        }
 
         return customView;
     }
@@ -54,6 +68,15 @@ public class PriceAlertAdaptor extends ArrayAdapter<PriceAlert> {
     public void insert(@Nullable PriceAlert object, int index) {
         super.insert(object, index);
         //
+    }
+
+    public boolean isBelowPrice(String price, String target){
+        Double p = Double.parseDouble(price.substring(1));
+        Double t = Double.parseDouble(target.substring(1));
+        if(p<t){
+            return true;
+        }
+        return false;
     }
 }
 

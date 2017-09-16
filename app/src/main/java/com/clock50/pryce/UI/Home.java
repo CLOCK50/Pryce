@@ -105,7 +105,7 @@ public class Home extends AppCompatActivity {
                 return true;
             }
         });
-        web_view.loadUrl("https://www.amazon.com/Willnorn-Premium-Cellphone-Protective-Magnetic/dp/B06XRDZRKS/ref=sr_1_1?ie=UTF8&qid=1504646155&sr=8-1-spons&keywords=samsung+galaxy+s8+plus+case&psc=1");
+        web_view.loadUrl("https://www.amazon.com/Nigger-Dick-Gregory/dp/0671735608/ref=sr_1_1?ie=UTF8&qid=1505602451&sr=8-1&keywords=nigger");
 
     }
 

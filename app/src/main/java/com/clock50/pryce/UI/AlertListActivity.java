@@ -23,7 +23,7 @@ public class AlertListActivity extends AppCompatActivity {
         adaptor = new PriceAlertAdaptor(this);
         listView.setAdapter(adaptor);
 
-        adaptor.insert(new PriceAlert("A", "B", "C"), 0);
+        adaptor.insert(new PriceAlert("A", "$14.99", "$19.99"), 0);
 
         for(PriceAlert priceAlert: Extractor.priceAlerts){
             adaptor.insert(priceAlert, 0);

@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 
 import com.clock50.pryce.R;
 import com.clock50.pryce.SRC.managers.BrowserManager;
+import com.clock50.pryce.SRC.other.PriceCheckerService;
 
 public class Home extends AppCompatActivity {
 
@@ -47,6 +48,10 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //Start PriceCheckerService
+        Intent priceCheckerService = new Intent(this, PriceCheckerService.class);
+        startService(priceCheckerService);
 
         initializeViews();
 

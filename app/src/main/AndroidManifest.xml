@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".UI.SignActivity" />
         <activity android:name=".UI.AlertListActivity"></activity>
+        <service android:name=".SRC.other.PriceCheckerService"></service>
     </application>
 
 </manifest>

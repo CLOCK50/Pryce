@@ -105,7 +105,7 @@ public class Home extends AppCompatActivity {
                 return true;
             }
         });
-        web_view.loadUrl("https://www.amazon.com/Nigger-Dick-Gregory/dp/0671735608/ref=sr_1_1?ie=UTF8&qid=1505602451&sr=8-1&keywords=nigger");
+        web_view.loadUrl("https://www.amazon.ca/Galaxy-Plus-Samsung-Spigen-Hybrid/dp/B06XP6CRP5/ref=sr_1_1?s=wireless&ie=UTF8&qid=1505604157&sr=1-1&keywords=samsung+s8+plus+cases");
 
     }
 

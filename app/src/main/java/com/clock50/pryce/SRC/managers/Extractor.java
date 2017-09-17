@@ -7,12 +7,15 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.clock50.pryce.SRC.PriceAlert;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class Extractor {
 
@@ -30,13 +33,16 @@ public class Extractor {
     private String price;
 
     /** A list containing all the product price alerts */
-    public static ArrayList<PriceAlert> priceAlerts = new ArrayList<>();
+    public static LinkedHashMap<PriceAlert, String> priceAlerts = new LinkedHashMap<>();
 
     /** Button clicked when wanting to add a price alert (need it for UI) */
     private Button btn_price_alert;
 
     /** Progress bar shown when extracting HTML data (need it for UI) */
     private ProgressBar progressbar_alerts;
+
+    /** Database where users' price alerts are stored */
+    public static DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot().child("User1");
 
 
     /* ************************************************************************* *
@@ -71,7 +77,7 @@ public class Extractor {
      *
      * @param url the url to parse
      */
-    public void extractAmazon(String url){
+    public void extractAmazon(String url, String temp_key){
         (new AsyncTask<Void, Void, Void>(){
 
             @Override
@@ -98,7 +104,15 @@ public class Extractor {
 
             @Override
             protected void onPostExecute(Void voids) {
-                priceAlerts.add(new PriceAlert(name, price, "$15.99"));
+                //Updating database further with name, price and targetprice of product
+                DatabaseReference postRoot = root.child(temp_key);
+                LinkedHashMap<String, Object> map2 = new LinkedHashMap<String, Object>();
+                map2.put("name", name);
+                map2.put("price", price);
+                map2.put("target_price", "CDN$ 15.99");
+                postRoot.updateChildren(map2);
+
+                //priceAlerts.put(new PriceAlert(name, price, "CDN$ 15.99", url, ""), "");
                 progressbar_alerts.setVisibility(View.INVISIBLE);
                 btn_price_alert.setText("CREATE PRICE ALERT");
                 //

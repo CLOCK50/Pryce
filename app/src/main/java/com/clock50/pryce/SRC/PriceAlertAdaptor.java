@@ -71,8 +71,8 @@ public class PriceAlertAdaptor extends ArrayAdapter<PriceAlert> {
     }
 
     public boolean isBelowPrice(String price, String target){
-        Double p = Double.parseDouble(price.substring(1));
-        Double t = Double.parseDouble(target.substring(1));
+        Double p = Double.parseDouble(price.substring(5));
+        Double t = Double.parseDouble(target.substring(5));
         if(p<t){
             return true;
         }

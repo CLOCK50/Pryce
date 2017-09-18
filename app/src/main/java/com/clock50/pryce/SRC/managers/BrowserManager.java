@@ -68,7 +68,7 @@ public class BrowserManager {
                 postRoot.updateChildren(map2);
 
                 Log.i("COS", "AMAZON");
-                Extractor.getInstance().extractAmazon(url, temp_key);
+                Extractor.getInstance().extractAmazon(url, temp_key, "", "");
                 break;
 
         }

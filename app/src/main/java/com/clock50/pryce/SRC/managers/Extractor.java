@@ -1,12 +1,15 @@
 package com.clock50.pryce.SRC.managers;
 
 import android.os.AsyncTask;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.clock50.pryce.SRC.PriceAlert;
+import com.clock50.pryce.SRC.PriceAlertAdaptor;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -77,7 +80,7 @@ public class Extractor {
      *
      * @param url the url to parse
      */
-    public void extractAmazon(String url, String temp_key){
+    public void extractAmazon(String url, String temp_key, String oldPrice, String targetPrice){
         (new AsyncTask<Void, Void, Void>(){
 
             @Override
@@ -92,6 +95,13 @@ public class Extractor {
                     }
                     price = priceData.text();
                     name = productNameData.text();
+                    //If price that is extracted, is below target price for the first time, send notification
+                    if(oldPrice.matches("") || targetPrice.matches("")){
+                        //Do nothing
+                    }
+                    else if(!price.matches(oldPrice) && PriceAlertAdaptor.isBelowPrice(price, targetPrice)){
+                        //TODO: Notification pops up
+                    }
                     Log.i("COS", "DOC: " + doc.html());
                     Log.i("COS", price);
                     Log.i("COS", "DONE.LOL.");

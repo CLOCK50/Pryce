@@ -32,7 +32,7 @@ public class PriceCheckerService extends IntentService {
             Toast.makeText(getApplicationContext(), "Extracting",
                     Toast.LENGTH_LONG).show();
             for(PriceAlert priceAlert: Extractor.priceAlerts.keySet()){
-                Extractor.getInstance().extractAmazon(priceAlert.getUrl(), priceAlert.getTemp_key());
+                Extractor.getInstance().extractAmazon(priceAlert.getUrl(), priceAlert.getTemp_key(), priceAlert.getPrice(), priceAlert.getTarget_price());
             }
             mHandler.postDelayed(ToastRunnable, 60000);
         }

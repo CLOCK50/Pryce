@@ -75,9 +75,9 @@ public class PriceAlertBox extends DialogFragment {
             price_alert.setTarget_price(target_price.toString());
 
             /* Create a new price alert inside the database and update the list of price alerts inside
-            *  the list view (extractor) */
+            *  HashMap in Extractor */
             price_alert = DatabaseManager.getInstance().createDBPriceAlert(price_alert);
-            Extractor.priceAlerts.put(price_alert, "");
+            Extractor.priceAlerts.put(price_alert.getTemp_key(), price_alert);
 
             dismiss();
         });

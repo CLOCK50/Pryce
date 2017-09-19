@@ -1,8 +1,7 @@
 package com.clock50.pryce.UI;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.clock50.pryce.R;
@@ -32,11 +31,8 @@ public class AlertListActivity extends AppCompatActivity {
         adaptor = new PriceAlertAdaptor(this);
         listView.setAdapter(adaptor);
 
-        adaptor.insert(new PriceAlert("A", "CDN$ 14.99", "CDN$ 19.99", "", ""), 0);
+        adaptor.insert(new PriceAlert("A", "CDN$ 14.99", "CDN$ 19.99", ""), 0);
 
-//        for(PriceAlert priceAlert: Extractor.priceAlerts){
-//            adaptor.insert(priceAlert, 0);
-//        }
         root.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -77,11 +73,14 @@ public class AlertListActivity extends AppCompatActivity {
             url = (String) ((DataSnapshot)i.next()).getValue();
         }
 
-        for(PriceAlert priceAlert: Extractor.priceAlerts.keySet()){
-            if(priceAlert.getTemp_key().matches(temp_key)){
-                priceAlert.setName(name);
-                priceAlert.setPrice(price);
-                priceAlert.setTarget_price(target_price);
+        for(String key: Extractor.priceAlerts.keySet()){
+
+            PriceAlert price_alert = Extractor.priceAlerts.get(key);
+
+            if(price_alert.getTemp_key().matches(temp_key)){
+                price_alert.setName(name);
+                price_alert.setPrice(price);
+                price_alert.setTarget_price(target_price);
                 adaptor.notifyDataSetChanged();
                 return;
             }
@@ -98,14 +97,20 @@ public class AlertListActivity extends AppCompatActivity {
             target_price = (String) ((DataSnapshot)i.next()).getValue();
             temp_key = (String) ((DataSnapshot)i.next()).getValue();
             url = (String) ((DataSnapshot)i.next()).getValue();
-            Extractor.priceAlerts.put(new PriceAlert(name, price, target_price, url, temp_key), "");
+
+            PriceAlert price_alert = new PriceAlert(name, price, target_price, url);
+            price_alert.setTemp_key(temp_key);
+
+            Extractor.priceAlerts.put(temp_key, price_alert);
         }
 
         adaptor.clear();
 
         //Iterate over Extractor.priceAlerts and update adapter
-        for(PriceAlert priceAlert: Extractor.priceAlerts.keySet()){
-            adaptor.insert(priceAlert, 0);
+        for(String key: Extractor.priceAlerts.keySet()){
+
+            PriceAlert price_alert = Extractor.priceAlerts.get(key);
+            adaptor.insert(price_alert, 0);
         }
 
     }

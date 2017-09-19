@@ -9,10 +9,6 @@ import android.widget.Toast;
 import com.clock50.pryce.SRC.PriceAlert;
 import com.clock50.pryce.SRC.managers.Extractor;
 
-/**
- * Created by pc on 2017-09-16.
- */
-
 public class PriceCheckerService extends IntentService {
 
     Handler mHandler = new Handler();
@@ -32,9 +28,15 @@ public class PriceCheckerService extends IntentService {
             Toast.makeText(getApplicationContext(), "Extracting",
                     Toast.LENGTH_LONG).show();
 
-            for(PriceAlert priceAlert : Extractor.priceAlerts.keySet()){
-                Extractor.getInstance().extractAmazon(priceAlert.getUrl(), priceAlert.getPrice(), priceAlert.getTarget_price());
+            /* For each price alert, update its name and price and check if its price is below the
+            *  target price through Extractor */
+            for(String key : Extractor.priceAlerts.keySet()){
+
+                PriceAlert price_alert = Extractor.priceAlerts.get(key);
+                Extractor.getInstance().extractAmazon(price_alert.getUrl(), key, price_alert);
+
             }
+
             mHandler.postDelayed(ToastRunnable, 60000);
         }
     };

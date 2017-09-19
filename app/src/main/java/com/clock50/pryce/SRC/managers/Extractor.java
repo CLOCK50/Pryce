@@ -27,7 +27,7 @@ public class Extractor {
     private String price;
 
     /** A list containing all the product price alerts */
-    public static LinkedHashMap<PriceAlert, String> priceAlerts = new LinkedHashMap<>();
+    public static LinkedHashMap<String, PriceAlert> priceAlerts = new LinkedHashMap<>();
 
 
     /* ************************************************************************* *
@@ -57,10 +57,10 @@ public class Extractor {
      * Performs several UI changes.
      *
      * @param url the url to parse
+     * @param key the unique key inside the priceAlerts HashMap to find the given price_alert (if one exists)
+     * @param price_alert an exisiting price_alert if one exists for the product
      */
-    public void extractAmazon(String url, String old_price, String target_price){
-
-        PriceAlert price_alert = new PriceAlert();
+    public void extractAmazon(String url, String key, final PriceAlert price_alert){
 
         (new AsyncTask<Void, Void, Void>(){
 
@@ -77,14 +77,33 @@ public class Extractor {
                         priceData = doc.select("span#priceblock_saleprice");
                     }
 
-                    /* Get just the price and name of the product and set it to the price_alert obj */
+                    /* Get just the price and name of the product */
                     name = productNameData.text();
                     price = priceData.text();
-                    price_alert.setName(name);
-                    price_alert.setPrice(price);
 
-                    /* Check to see if the product price is below the target price */
-                    PriceAlertManager.getInstance().checkPriceAlert(price, old_price, target_price);
+                    /* If it's a new price alert then initialize it */
+                    if(key.equals("")){
+                        price_alert.setName(name);
+                        price_alert.setPrice(price);
+                    }
+                    /* If we are updating an exisiting price alert then... */
+                    else {
+                        String old_price = price_alert.getPrice();
+                        String target_price = price_alert.getTarget_price();
+
+                        /* Check to see if the product price is below the target price */
+                        PriceAlertManager.getInstance().checkPriceAlert(price, old_price, target_price);
+
+                        /* If the name and/or price has changed, then update it */
+                        if(!price_alert.getName().equals(name) || !price_alert.getPrice().equals(price)) {
+                            price_alert.setName(name);
+                            price_alert.setPrice(price);
+                        }
+
+                        /* Update the price_alert inside the priceAlerts HashMap (list) */
+                        priceAlerts.put(key, price_alert);
+
+                    }
 
                     Log.i("COS", "DOC: " + doc.html());
                     Log.i("COS", price);

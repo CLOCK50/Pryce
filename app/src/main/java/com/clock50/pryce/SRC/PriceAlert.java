@@ -1,25 +1,46 @@
 package com.clock50.pryce.SRC;
 
-/**
- * Created by pc on 2017-09-05.
- */
 
 public class PriceAlert {
 
-    //
+    /* ************************************************************************* *
+     *                                                                           *
+     * Instance Variables                                                        *
+     *                                                                           *
+     * ************************************************************************* */
+
     private String name;
     private String price;
     private String target_price;
     private String url;
     private String temp_key;
 
-    public PriceAlert(String name, String price, String target_price, String url, String temp_key){
+    /* ************************************************************************* *
+     *                                                                           *
+     * Constructors                                                              *
+     *                                                                           *
+     * ************************************************************************* */
+
+    public PriceAlert(){
+        this.name = "";
+        this.price = "";
+        this.target_price = "";
+        this.url = "";
+    }
+
+    public PriceAlert(String name, String price, String target_price, String url){
         this.name = name;
         this.price = price;
         this.target_price = target_price;
         this.url = url;
-        this.temp_key = temp_key;
     }
+
+
+    /* ************************************************************************* *
+     *                                                                           *
+     * Getters & Setters                                                         *
+     *                                                                           *
+     * ************************************************************************* */
 
     public void setName(String name) {
         this.name = name;
@@ -31,6 +52,14 @@ public class PriceAlert {
 
     public void setTarget_price(String target_price) {
         this.target_price = target_price;
+    }
+
+    public void setTemp_key(String temp_key) {
+        this.temp_key = temp_key;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getUrl() {
@@ -52,6 +81,13 @@ public class PriceAlert {
     public String getTarget_price() {
         return target_price;
     }
+
+
+    /* ************************************************************************* *
+     *                                                                           *
+     * Basic Object Instance Methods                                             *
+     *                                                                           *
+     * ************************************************************************* */
 
     @Override
     public boolean equals(Object o) {

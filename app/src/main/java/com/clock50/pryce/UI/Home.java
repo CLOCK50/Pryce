@@ -16,6 +16,9 @@ import android.widget.ProgressBar;
 
 import com.clock50.pryce.R;
 import com.clock50.pryce.SRC.managers.BrowserManager;
+import com.clock50.pryce.SRC.managers.DatabaseManager;
+import com.clock50.pryce.SRC.managers.Extractor;
+import com.clock50.pryce.SRC.managers.PriceAlertManager;
 import com.clock50.pryce.SRC.other.PriceCheckerService;
 
 public class Home extends AppCompatActivity {
@@ -49,12 +52,17 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //Start PriceCheckerService
+        /* Start PriceCheckerService */
         Intent priceCheckerService = new Intent(this, PriceCheckerService.class);
         startService(priceCheckerService);
 
         initializeViews();
 
+        /* Construct all the managers */
+        BrowserManager.getInstance().construct(getFragmentManager(), btn_price_alert, progressbar_alerts);
+        Extractor.getInstance().construct();
+        DatabaseManager.getInstance().construct();
+        PriceAlertManager.getInstance().construct();
 
     }
 
@@ -71,7 +79,6 @@ public class Home extends AppCompatActivity {
         txtfld_search_bar = (EditText) findViewById(R.id.txtfld_search_bar);
         progressbar_alerts = (ProgressBar) findViewById(R.id.progressbar_alerts);
         btn_price_alert = (Button) findViewById(R.id.btn_price_alert);
-        BrowserManager.getInstance().construct(btn_price_alert, progressbar_alerts);
 
         /* Setup for the text field when the user finishes editing */
         txtfld_search_bar.setOnEditorActionListener((textView, actionId, event) -> {
@@ -134,7 +141,7 @@ public class Home extends AppCompatActivity {
         btn_price_alert.setText("");
         progressbar_alerts.setVisibility(View.VISIBLE);
 
-        BrowserManager.getInstance().getInfo(url);
+        BrowserManager.getInstance().beginExtract(url);
 
     }
 

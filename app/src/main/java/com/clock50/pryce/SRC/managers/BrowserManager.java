@@ -1,15 +1,13 @@
 package com.clock50.pryce.SRC.managers;
 
+import android.app.FragmentManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import com.clock50.pryce.SRC.PriceAlert;
+import com.clock50.pryce.UI.PriceAlertBox;
 
 /**
  * Created by pc on 2017-09-02.
@@ -23,9 +21,14 @@ public class BrowserManager {
      *                                                                           *
      * ************************************************************************* */
 
+    private FragmentManager fragment_manager;
+
+    /** Button clicked when wanting to add a price alert (need it for UI) */
     private Button btn_price_alert;
+
+    /** Progress bar shown when extracting HTML data (need it for UI) */
     private ProgressBar progressbar_alerts;
-    public static DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot().child("User1");
+
 
     /* ************************************************************************* *
      *                                                                           *
@@ -33,10 +36,11 @@ public class BrowserManager {
      *                                                                           *
      * ************************************************************************* */
 
-    public void construct(Button btn_price_alert, ProgressBar progressbar_alerts){
+    public void construct(FragmentManager fragment_manager,
+                          Button btn_price_alert, ProgressBar progressbar_alerts){
+        this.fragment_manager = fragment_manager;
         this.btn_price_alert = btn_price_alert;
         this.progressbar_alerts = progressbar_alerts;
-        Extractor.getInstance().construct(btn_price_alert, progressbar_alerts);
     }
 
 
@@ -47,37 +51,45 @@ public class BrowserManager {
      * ************************************************************************* */
 
     //TODO: live verification checkbox beside edittext
-    public void getInfo(String url){
-        //Detect string,
+
+    /**
+     * Begins the extraction by verifying the URL and then calling the appropriate extractor.
+     *
+     * @param url the url of the product to extract the product info from
+     */
+    public void beginExtract(String url){
+        // TODO: Detect string,
         String domain = getValidDomain(url);
 
         domain = "Amazon"; // TODO: REMOVE AFTER DEBUG
         switch (domain){
             case "Amazon":
-                //Uploading price alert data to database
-                Map<String, Object> map = new HashMap<String, Object>();//
-                String temp_key = root.push().getKey();
-                root.updateChildren(map);
-                DatabaseReference postRoot = root.child(temp_key);
-                LinkedHashMap<String, Object> map2 = new LinkedHashMap<String, Object>();
-                map2.put("name", "");
-                map2.put("price", "");
-                map2.put("target_price", "");
-                map2.put("url", url);
-                map2.put("temp_key", temp_key);
-                postRoot.updateChildren(map2);
-
                 Log.i("COS", "AMAZON");
-                Extractor.getInstance().extractAmazon(url, temp_key, "", "");
+                Extractor.getInstance().extractAmazon(url, "", "");
                 break;
 
         }
     }
 
+
     public String getValidDomain(String url){
         return "";
     }
 
+
+    /**
+     * Finishes the product extraction and performs the appropriate UI changes. Show the price alert
+     * box allowing the user to create a new price alert.
+     *
+     * @param price_alert the price_alert object to pass to the price alert dialog
+     */
+    public void finishExtract(PriceAlert price_alert){
+        progressbar_alerts.setVisibility(View.INVISIBLE);
+        btn_price_alert.setText("CREATE PRICE ALERT");
+
+        PriceAlertBox price_alert_box = new PriceAlertBox(price_alert);
+        price_alert_box.show(fragment_manager, "Add Price Alert");
+    }
 
 
     /* ************************************************************************* *

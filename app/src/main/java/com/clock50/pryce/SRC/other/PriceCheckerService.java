@@ -4,7 +4,6 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.clock50.pryce.SRC.PriceAlert;
@@ -29,10 +28,12 @@ public class PriceCheckerService extends IntentService {
 
     final Runnable ToastRunnable = new Runnable() {
         public void run() {
+
             Toast.makeText(getApplicationContext(), "Extracting",
                     Toast.LENGTH_LONG).show();
-            for(PriceAlert priceAlert: Extractor.priceAlerts.keySet()){
-                Extractor.getInstance().extractAmazon(priceAlert.getUrl(), priceAlert.getTemp_key(), priceAlert.getPrice(), priceAlert.getTarget_price());
+
+            for(PriceAlert priceAlert : Extractor.priceAlerts.keySet()){
+                Extractor.getInstance().extractAmazon(priceAlert.getUrl(), priceAlert.getPrice(), priceAlert.getTarget_price());
             }
             mHandler.postDelayed(ToastRunnable, 60000);
         }

@@ -1,5 +1,6 @@
 package com.clock50.pryce.SRC.managers;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -59,8 +60,9 @@ public class Extractor {
      * @param url the url to parse
      * @param key the unique key inside the priceAlerts HashMap to find the given price_alert (if one exists)
      * @param price_alert an exisiting price_alert if one exists for the product
+     * @param isUpdate true if we are updating an existing price_alert
      */
-    public void extractAmazon(String url, String key, final PriceAlert price_alert){
+    public void extractAmazon(Context context, String url, String key, final PriceAlert price_alert, boolean isUpdate){
 
         (new AsyncTask<Void, Void, Void>(){
 
@@ -85,24 +87,29 @@ public class Extractor {
                     if(key.equals("")){
                         price_alert.setName(name);
                         price_alert.setPrice(price);
+                        price_alert.setUrl(url);
+                        price_alert.getPrevious_prices().add(price);
                     }
                     /* If we are updating an exisiting price alert then... */
                     else {
-                        String old_price = price_alert.getPrice();
-                        String target_price = price_alert.getTarget_price();
-
-                        /* Check to see if the product price is below the target price */
-                        PriceAlertManager.getInstance().checkPriceAlert(price, old_price, target_price);
 
                         /* If the name and/or price has changed, then update it */
-                        if(!price_alert.getName().equals(name) || !price_alert.getPrice().equals(price)) {
+                        if(!price_alert.getName().equals(name)) {
                             price_alert.setName(name);
+                        }
+
+                        if(!price_alert.getPrice().equals(price)) {
                             price_alert.setPrice(price);
+                            price_alert.getPrevious_prices().add(price);
                         }
 
                         /* Update the price_alert inside the priceAlerts HashMap (list) */
                         priceAlerts.put(key, price_alert);
 
+                        /* Check to see if the product price is below the target price */
+                        if(context != null) {
+                            PriceAlertManager.getInstance().checkPriceAlert(context, price_alert);
+                        }
                     }
 
                     Log.i("COS", "DOC: " + doc.html());
@@ -119,8 +126,13 @@ public class Extractor {
 
             @Override
             protected void onPostExecute(Void voids) {
-                /* Perform any final UI changes */
-                BrowserManager.getInstance().finishExtract(price_alert);
+                if(isUpdate){
+                    DatabaseManager.getInstance().createDBPriceAlert(price_alert);
+                }
+                else {
+                    /* Perform any final UI changes */
+                    BrowserManager.getInstance().finishExtract(price_alert);
+                }
             }
         }).execute();
     }

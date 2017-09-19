@@ -65,7 +65,7 @@ public class BrowserManager {
         switch (domain){
             case "Amazon":
                 Log.i("COS", "AMAZON");
-                Extractor.getInstance().extractAmazon(url, "", new PriceAlert());
+                Extractor.getInstance().extractAmazon(null, url, "", new PriceAlert(), false);
                 break;
 
         }

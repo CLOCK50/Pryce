@@ -60,7 +60,10 @@
         android:layout_marginTop="16dp"
         app:layout_constraintHorizontal_bias="0.502"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/listview_alerts"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/top_bar"

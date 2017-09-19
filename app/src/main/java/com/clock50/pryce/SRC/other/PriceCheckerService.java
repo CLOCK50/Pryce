@@ -4,10 +4,12 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.clock50.pryce.SRC.PriceAlert;
 import com.clock50.pryce.SRC.managers.Extractor;
+import com.clock50.pryce.SRC.managers.PriceAlertManager;
 
 public class PriceCheckerService extends IntentService {
 
@@ -19,7 +21,7 @@ public class PriceCheckerService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        mHandler.postDelayed(ToastRunnable, 60000);
+        mHandler.postDelayed(ToastRunnable, 20000);
     }
 
     final Runnable ToastRunnable = new Runnable() {
@@ -33,11 +35,11 @@ public class PriceCheckerService extends IntentService {
             for(String key : Extractor.priceAlerts.keySet()){
 
                 PriceAlert price_alert = Extractor.priceAlerts.get(key);
-                Extractor.getInstance().extractAmazon(price_alert.getUrl(), key, price_alert);
-
+                Extractor.getInstance().extractAmazon(getApplicationContext(), price_alert.getUrl(), key, price_alert, true);
             }
 
             mHandler.postDelayed(ToastRunnable, 60000);
         }
     };
+
 }

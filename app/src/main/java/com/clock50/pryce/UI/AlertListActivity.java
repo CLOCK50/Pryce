@@ -2,6 +2,7 @@ package com.clock50.pryce.UI;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.clock50.pryce.R;
@@ -31,7 +32,7 @@ public class AlertListActivity extends AppCompatActivity {
         adaptor = new PriceAlertAdaptor(this);
         listView.setAdapter(adaptor);
 
-        adaptor.insert(new PriceAlert("A", "CDN$ 14.99", "CDN$ 19.99", ""), 0);
+        //adaptor.insert(new PriceAlert("A", "CDN$ 14.99", "CDN$ 19.99", ""), 0);
 
         root.addChildEventListener(new ChildEventListener() {
             @Override
@@ -41,7 +42,9 @@ public class AlertListActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Log.i("COS", "DATABASE ITEM CHANGED");
                 updateProduct(dataSnapshot);
+                adaptor.notifyDataSetChanged();
             }
 
             @Override
@@ -62,7 +65,7 @@ public class AlertListActivity extends AppCompatActivity {
     }
 
     //Called when name, price or targetPrice are updated in online database
-    private void updateProduct(DataSnapshot dataSnapshot){
+   private void updateProduct(DataSnapshot dataSnapshot){
         Iterator i = dataSnapshot.getChildren().iterator();
 
         while(i.hasNext()){
@@ -81,7 +84,7 @@ public class AlertListActivity extends AppCompatActivity {
                 price_alert.setName(name);
                 price_alert.setPrice(price);
                 price_alert.setTarget_price(target_price);
-                adaptor.notifyDataSetChanged();
+
                 return;
             }
         }

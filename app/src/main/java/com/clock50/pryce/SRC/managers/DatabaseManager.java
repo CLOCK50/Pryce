@@ -50,10 +50,17 @@ public class DatabaseManager {
     public PriceAlert createDBPriceAlert(PriceAlert price_alert){
 
         Map<String, Object> map = new HashMap<>();
+        String temp_key = "";
+
 
         /* Get the unique database key for the price alert object */
-        String temp_key = root.push().getKey();
-        price_alert.setTemp_key(temp_key);
+        if(price_alert.getTemp_key().equals("")){
+            temp_key = root.push().getKey();
+            price_alert.setTemp_key(temp_key);
+        }
+        else{
+            temp_key = price_alert.getTemp_key();
+        }
 
         root.updateChildren(map);
 

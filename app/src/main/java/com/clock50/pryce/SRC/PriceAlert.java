@@ -1,6 +1,9 @@
 package com.clock50.pryce.SRC;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PriceAlert {
 
     /* ************************************************************************* *
@@ -14,6 +17,7 @@ public class PriceAlert {
     private String target_price;
     private String url;
     private String temp_key;
+    private List<String> previous_prices;
 
     /* ************************************************************************* *
      *                                                                           *
@@ -26,6 +30,8 @@ public class PriceAlert {
         this.price = "";
         this.target_price = "";
         this.url = "";
+        this.temp_key = "";
+        this.previous_prices = new ArrayList<String>();
     }
 
     public PriceAlert(String name, String price, String target_price, String url){
@@ -33,6 +39,7 @@ public class PriceAlert {
         this.price = price;
         this.target_price = target_price;
         this.url = url;
+        this.previous_prices = new ArrayList<String>();
     }
 
 
@@ -82,6 +89,9 @@ public class PriceAlert {
         return target_price;
     }
 
+    public List<String> getPrevious_prices() {
+        return previous_prices;
+    }
 
     /* ************************************************************************* *
      *                                                                           *

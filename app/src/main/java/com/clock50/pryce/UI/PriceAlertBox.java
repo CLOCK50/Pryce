@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,14 +69,15 @@ public class PriceAlertBox extends DialogFragment {
         builder.setPositiveButton("Add Alert", (dialog, id) -> {
 
             /* Change the name of the product in the PriceAlert incase the user changed it */
-            price_alert.setName(product_name.toString());
+            price_alert.setName(product_name.getText().toString());
             EditText target_price = view.findViewById(R.id.target_price);
 
             /* Set the target price in the PriceAlert */
-            price_alert.setTarget_price(target_price.toString());
+            price_alert.setTarget_price(target_price.getText().toString());
 
             /* Create a new price alert inside the database and update the list of price alerts inside
             *  HashMap in Extractor */
+            Log.i("COS", "Price alert in DB NAME: " + price_alert.getName());
             price_alert = DatabaseManager.getInstance().createDBPriceAlert(price_alert);
             Extractor.priceAlerts.put(price_alert.getTemp_key(), price_alert);
 

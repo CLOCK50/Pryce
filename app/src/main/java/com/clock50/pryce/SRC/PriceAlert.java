@@ -18,6 +18,7 @@ public class PriceAlert {
     private String url;
     private String temp_key;
     private List<String> previous_prices;
+    public boolean isNotified;
 
     /* ************************************************************************* *
      *                                                                           *
@@ -32,6 +33,7 @@ public class PriceAlert {
         this.url = "";
         this.temp_key = "";
         this.previous_prices = new ArrayList<String>();
+        this.isNotified = false;
     }
 
     public PriceAlert(String name, String price, String target_price, String url){
@@ -67,6 +69,10 @@ public class PriceAlert {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void setPrevious_prices(List<String> previous_prices) {
+        this.previous_prices = previous_prices;
     }
 
     public String getUrl() {

@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.clock50.pryce.R;
 import com.clock50.pryce.SRC.PriceAlert;
+import com.clock50.pryce.SRC.other.PriceCheckerService;
 import com.clock50.pryce.UI.AlertListActivity;
 
 /**
@@ -44,24 +46,33 @@ public class PriceAlertManager {
      */
     public void checkPriceAlert(Context context, PriceAlert price_alert){
 
-        String previous_price = price_alert.getPrevious_prices().get(price_alert.getPrevious_prices().size() - 1);
-
         /* If the extracted price is below target price then send notification */
-        if(!price_alert.getPrice().equals(previous_price) &&
-                isBelowPrice(price_alert.getPrice(), price_alert.getTarget_price())){
+        if(isBelowPrice(price_alert.getPrice(), price_alert.getTarget_price())){
+            if(!price_alert.isNotified) {
 
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                    .setContentTitle("Price Alert")
-                    .setContentText(price_alert.getName() + " is under " + price_alert.getTarget_price());
+                /* Price alert is now notified to user, so update in list */
+                price_alert.isNotified = true;
+                PriceCheckerService.priceAlerts.put(price_alert.getTemp_key(), price_alert);
 
-            Intent resultIntent = new Intent(context, AlertListActivity.class);
-            PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
+                /* Create and send notification */
+                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                        .setContentTitle("Price Alert")
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentText(price_alert.getName() + " is under " + price_alert.getTarget_price());
 
-            mBuilder.setContentIntent(resultPendingIntent);
+                Intent resultIntent = new Intent(context, AlertListActivity.class);
+                PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
 
-            ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE))
-                    .notify(2420, mBuilder.build());
+                mBuilder.setContentIntent(resultPendingIntent);
+
+                ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE))
+                        .notify(2420, mBuilder.build());
+            }
+        }
+        else{
+            /* If the price isn't below the target price, then keep the alert's isNotified false */
+            price_alert.isNotified = false;
         }
     }
 

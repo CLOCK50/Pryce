@@ -69,14 +69,20 @@ public class DatabaseManager {
         /* Create and update the PriceAlert object inside the database */
         LinkedHashMap<String, Object> map2 = new LinkedHashMap<>();
         map2.put("name", price_alert.getName());
+        map2.put("previous_prices", price_alert.getPrevious_prices());
         map2.put("price", price_alert.getPrice());
         map2.put("target_price", price_alert.getTarget_price());
         map2.put("url", price_alert.getUrl());
+        map2.put("isNotified", price_alert.isNotified);
         map2.put("temp_key", temp_key);
 
         postRoot.updateChildren(map2);
 
         return price_alert;
+
+    }
+
+    private void listToString(){
 
     }
 

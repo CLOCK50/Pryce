@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.clock50.pryce.SRC.PriceAlert;
+import com.clock50.pryce.SRC.other.PriceCheckerService;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -28,7 +29,7 @@ public class Extractor {
     private String price;
 
     /** A list containing all the product price alerts */
-    public static LinkedHashMap<String, PriceAlert> priceAlerts = new LinkedHashMap<>();
+    //public static LinkedHashMap<String, PriceAlert> priceAlerts = new LinkedHashMap<>();
 
 
     /* ************************************************************************* *
@@ -93,6 +94,8 @@ public class Extractor {
                     /* If we are updating an exisiting price alert then... */
                     else {
 
+                        Log.i("COS", "UPDATING price alert");
+
                         /* If the name and/or price has changed, then update it */
                         if(!price_alert.getName().equals(name)) {
                             price_alert.setName(name);
@@ -104,7 +107,7 @@ public class Extractor {
                         }
 
                         /* Update the price_alert inside the priceAlerts HashMap (list) */
-                        priceAlerts.put(key, price_alert);
+                        PriceCheckerService.priceAlerts.put(key, price_alert);
 
                         /* Check to see if the product price is below the target price */
                         if(context != null) {
@@ -126,11 +129,7 @@ public class Extractor {
 
             @Override
             protected void onPostExecute(Void voids) {
-                if(isUpdate){
-                    DatabaseManager.getInstance().createDBPriceAlert(price_alert);
-                }
-                else {
-                    /* Perform any final UI changes */
+                if(!isUpdate){
                     BrowserManager.getInstance().finishExtract(price_alert);
                 }
             }

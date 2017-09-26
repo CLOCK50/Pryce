@@ -16,6 +16,7 @@ import com.clock50.pryce.R;
 import com.clock50.pryce.SRC.PriceAlert;
 import com.clock50.pryce.SRC.managers.DatabaseManager;
 import com.clock50.pryce.SRC.managers.Extractor;
+import com.clock50.pryce.SRC.other.PriceCheckerService;
 
 public class PriceAlertBox extends DialogFragment {
 
@@ -79,7 +80,7 @@ public class PriceAlertBox extends DialogFragment {
             *  HashMap in Extractor */
             Log.i("COS", "Price alert in DB NAME: " + price_alert.getName());
             price_alert = DatabaseManager.getInstance().createDBPriceAlert(price_alert);
-            Extractor.priceAlerts.put(price_alert.getTemp_key(), price_alert);
+            PriceCheckerService.priceAlerts.put(price_alert.getTemp_key(), price_alert);
 
             dismiss();
         });

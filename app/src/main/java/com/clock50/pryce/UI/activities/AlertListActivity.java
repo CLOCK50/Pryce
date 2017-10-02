@@ -1,15 +1,16 @@
-package com.clock50.pryce.UI;
+package com.clock50.pryce.UI.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import com.clock50.pryce.R;
 import com.clock50.pryce.SRC.PriceAlert;
 import com.clock50.pryce.SRC.PriceAlertAdaptor;
-import com.clock50.pryce.SRC.managers.Extractor;
-import com.clock50.pryce.SRC.other.PriceCheckerService;
+import com.clock50.pryce.SRC.services.PriceCheckerService;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -127,6 +128,37 @@ public class AlertListActivity extends AppCompatActivity {
             adaptor.insert(price_alert, 0);
         }
 
+    }
+
+
+    /* ************************************************************************* *
+     *                                                                           *
+     * Button Instance Methods                                                   *
+     *                                                                           *
+     * ************************************************************************  */
+
+
+    /**
+     * Called when one of the three tabs on the bottom is clicked. Launches
+     * the corresponding activity.
+     *
+     * @param view the view (tab) that was clicked
+     */
+    public void onTabBtnClick(View view){
+        Intent intent = null;
+
+        switch (view.getId()){
+            case R.id.btn_settings:
+                intent = new Intent(this, SettingsActivity.class);
+                break;
+            case R.id.btn_browser:
+                intent = new Intent(this, Home.class);
+                break;
+        }
+
+        if(intent != null) {
+            startActivity(intent);
+        }
     }
 
 

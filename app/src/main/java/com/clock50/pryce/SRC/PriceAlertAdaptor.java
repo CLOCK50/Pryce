@@ -40,26 +40,23 @@ public class PriceAlertAdaptor extends ArrayAdapter<PriceAlert> {
         View customView = layout_inflater.inflate(R.layout.list_item, parent, false);
 
         PriceAlert singePostItem = getItem(position);
-        TextView list_text_top = customView.findViewById(R.id.list_text_top);
-        TextView list_txt_middle = customView.findViewById(R.id.list_txt_middle);
-        TextView list_txt_bottom = customView.findViewById(R.id.list_txt_bottom);
+        TextView list_item_text_name = customView.findViewById(R.id.list_item_text_name);
+        TextView list_item_text_price = customView.findViewById(R.id.list_item_text_price);
+        TextView list_item_text_target = customView.findViewById(R.id.list_item_text_target);
 
         String price = singePostItem.getPrice();
         String targetPrice = singePostItem.getTarget_price();
 
-        list_text_top.setText("NAME: " + singePostItem.getName());
-        list_txt_middle.setText("CURRENT PRICE: " + price);
-        list_txt_bottom.setText("TARGET PRICE: " + targetPrice);
+        list_item_text_name.setText(singePostItem.getName());
+        list_item_text_price.setText(price);
+        list_item_text_target.setText("TARGET: " + targetPrice);
 
         // TODO: CHANGE THIS UI
-        if(price.matches("") || targetPrice.matches("")){
-            customView.setBackgroundColor(Color.argb(100,2,3,4));
-        }
-        else if(PriceAlertManager.isBelowPrice(price, targetPrice)){
-            customView.setBackgroundColor(Color.argb(100, 0, 255, 0));
+        if(PriceAlertManager.isBelowPrice(price, targetPrice)){
+            list_item_text_price.setTextColor(Color.argb(255, 0, 146, 0));
         }
         else{
-            customView.setBackgroundColor(Color.argb(100, 255, 0, 0));
+            list_item_text_price.setTextColor(Color.argb(255, 225, 0, 0));
         }
 
         return customView;

@@ -5,13 +5,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.clock50.pryce.SRC.PriceAlert;
-import com.clock50.pryce.SRC.other.PriceCheckerService;
+import com.clock50.pryce.SRC.services.PriceCheckerService;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.util.LinkedHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Extractor {
 
@@ -27,9 +28,6 @@ public class Extractor {
 
     /** The price of the extracted product */
     private String price;
-
-    /** A list containing all the product price alerts */
-    //public static LinkedHashMap<String, PriceAlert> priceAlerts = new LinkedHashMap<>();
 
 
     /* ************************************************************************* *
@@ -84,6 +82,9 @@ public class Extractor {
                     name = productNameData.text();
                     price = priceData.text();
 
+                    /* Extract just the price from the price string */
+                    extractPrice();
+
                     /* If it's a new price alert then initialize it */
                     if(key.equals("")){
                         price_alert.setName(name);
@@ -134,6 +135,24 @@ public class Extractor {
                 }
             }
         }).execute();
+    }
+
+
+    /* ************************************************************************* *
+     *                                                                           *
+     * Helper Instance Methods                                                   *
+     *                                                                           *
+     * ************************************************************************* */
+
+    /**
+     * Gets only the price from the global String 'price' after it has extracted from the website.
+     */
+    private void extractPrice(){
+        Matcher m = Pattern.compile("\\d{0,8}(\\.\\d{1,4})?$").matcher(price);
+        price = "";
+        while(m.find()){
+            price += m.group(0);
+        }
     }
 
 

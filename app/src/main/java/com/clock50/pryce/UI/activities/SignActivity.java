@@ -1,4 +1,4 @@
-package com.clock50.pryce.UI;
+package com.clock50.pryce.UI.activities;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.clock50.pryce.R;
 import com.clock50.pryce.SRC.managers.LoginManager;
+import com.clock50.pryce.UI.activities.Home;
 
 public class SignActivity extends AppCompatActivity {
 

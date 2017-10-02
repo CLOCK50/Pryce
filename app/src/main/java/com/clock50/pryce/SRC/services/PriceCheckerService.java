@@ -1,10 +1,9 @@
-package com.clock50.pryce.SRC.other;
+package com.clock50.pryce.SRC.services;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.clock50.pryce.SRC.PriceAlert;
@@ -15,7 +14,6 @@ import com.clock50.pryce.SRC.managers.PriceAlertManager;
 import java.util.LinkedHashMap;
 
 public class PriceCheckerService extends IntentService {
-
 
     /** A list containing all the product price alerts */
     public static LinkedHashMap<String, PriceAlert> priceAlerts = new LinkedHashMap<>();

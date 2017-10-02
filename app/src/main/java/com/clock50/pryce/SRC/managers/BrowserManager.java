@@ -4,10 +4,11 @@ import android.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.clock50.pryce.SRC.PriceAlert;
-import com.clock50.pryce.UI.PriceAlertBox;
+import com.clock50.pryce.UI.fragments.PriceAlertBox;
 
 /**
  * Created by pc on 2017-09-02.
@@ -24,7 +25,7 @@ public class BrowserManager {
     private FragmentManager fragment_manager;
 
     /** Button clicked when wanting to add a price alert (need it for UI) */
-    private Button btn_price_alert;
+    private ImageView plus_icon;
 
     /** Progress bar shown when extracting HTML data (need it for UI) */
     private ProgressBar progressbar_alerts;
@@ -37,9 +38,9 @@ public class BrowserManager {
      * ************************************************************************* */
 
     public void construct(FragmentManager fragment_manager,
-                          Button btn_price_alert, ProgressBar progressbar_alerts){
+                          ImageView plus_icon, ProgressBar progressbar_alerts){
         this.fragment_manager = fragment_manager;
-        this.btn_price_alert = btn_price_alert;
+        this.plus_icon = plus_icon;
         this.progressbar_alerts = progressbar_alerts;
     }
 
@@ -85,7 +86,7 @@ public class BrowserManager {
      */
     public void finishExtract(PriceAlert price_alert){
         progressbar_alerts.setVisibility(View.INVISIBLE);
-        btn_price_alert.setText("CREATE PRICE ALERT");
+        plus_icon.setVisibility(View.VISIBLE);
 
         PriceAlertBox price_alert_box = new PriceAlertBox(price_alert);
         price_alert_box.show(fragment_manager, "Add Price Alert");

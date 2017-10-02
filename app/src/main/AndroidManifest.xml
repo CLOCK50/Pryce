@@ -11,16 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".UI.Home">
+        <activity android:name=".UI.activities.Home"></activity>
+        <activity android:name=".UI.activities.SignActivity" />
+        <activity android:name=".UI.activities.AlertListActivity" />
+
+        <service android:name=".SRC.services.PriceCheckerService" />
+
+        <activity android:name=".UI.other.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.SignActivity" />
-        <activity android:name=".UI.AlertListActivity"></activity>
-        <service android:name=".SRC.other.PriceCheckerService"></service>
+        <activity android:name=".UI.activities.SettingsActivity"></activity>
     </application>
 
 </manifest>

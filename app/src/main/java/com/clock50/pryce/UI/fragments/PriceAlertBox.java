@@ -1,4 +1,4 @@
-package com.clock50.pryce.UI;
+package com.clock50.pryce.UI.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -15,8 +15,7 @@ import android.widget.TextView;
 import com.clock50.pryce.R;
 import com.clock50.pryce.SRC.PriceAlert;
 import com.clock50.pryce.SRC.managers.DatabaseManager;
-import com.clock50.pryce.SRC.managers.Extractor;
-import com.clock50.pryce.SRC.other.PriceCheckerService;
+import com.clock50.pryce.SRC.services.PriceCheckerService;
 
 public class PriceAlertBox extends DialogFragment {
 

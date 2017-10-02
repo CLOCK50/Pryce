@@ -2,10 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintlayout_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/home_bg"
-    tools:context="com.clock50.pryce.UI.Home">
+    tools:context="com.clock50.pryce.UI.activities.Home">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -19,7 +20,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/btn_browser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -28,67 +29,33 @@
             app:srcCompat="@drawable/btn_normal_browser" />
 
         <ImageView
-            android:id="@+id/imageView12"
+            android:id="@+id/btn_alerts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:clickable="true"
-            android:onClick="onTabAlertsClick"
+            android:onClick="onTabBtnClick"
             app:srcCompat="@drawable/btn_normal_alerts" />
 
         <ImageView
-            android:id="@+id/imageView13"
+            android:id="@+id/btn_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onTabBtnClick"
             app:srcCompat="@drawable/btn_normal_settings" />
 
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="383dp"
-        android:layout_height="50dp"
-        android:background="#136800"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <Button
-            android:id="@+id/btn_price_alert"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_x="0dp"
-            android:layout_y="398dp"
-            android:background="?attr/selectableItemBackground"
-            android:onClick="onBtnAlertClick"
-            android:text="CREATE PRICE ALERT"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <ProgressBar
-            android:id="@+id/progressbar_alerts"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:visibility="invisible" />
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginTop="2dp"
         android:background="@color/colorPrimaryDark"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -128,14 +95,80 @@
         android:id="@+id/web_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
         android:alpha=".99"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteY="79dp">
 
     </WebView>
+
+    <ImageView
+        android:id="@+id/btn_add_price_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_x="356dp"
+        android:layout_y="419dp"
+        android:clickable="true"
+        android:onClick="onBtnAddPriceAlertClick"
+        app:layout_constraintBottom_toTopOf="@+id/btn_price_alerts"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_price_alerts"
+        app:layout_constraintRight_toRightOf="@+id/btn_price_alerts"
+        app:srcCompat="@drawable/btn_add_alert" />
+
+    <RelativeLayout
+        android:id="@+id/btn_price_alerts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_x="334dp"
+        android:layout_y="453dp"
+        android:clickable="true"
+        android:onClick="onBtnAddClick"
+        app:layout_constraintBottom_toBottomOf="@+id/web_view"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.994">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/btn_add_price_alert" />
+
+        <ImageView
+            android:id="@+id/plus_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:adjustViewBounds="false"
+            android:visibility="visible"
+            app:srcCompat="@drawable/white_plus" />
+
+        <ProgressBar
+            android:id="@+id/progressbar_alerts"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/plus_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="invisible" />
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

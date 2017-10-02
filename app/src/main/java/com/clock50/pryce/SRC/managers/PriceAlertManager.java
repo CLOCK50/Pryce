@@ -10,8 +10,8 @@ import android.util.Log;
 
 import com.clock50.pryce.R;
 import com.clock50.pryce.SRC.PriceAlert;
-import com.clock50.pryce.SRC.other.PriceCheckerService;
-import com.clock50.pryce.UI.AlertListActivity;
+import com.clock50.pryce.SRC.services.PriceCheckerService;
+import com.clock50.pryce.UI.activities.AlertListActivity;
 
 /**
  * Manages all the PriceAlerts by allowing the user to add, modify, delete them. Provides access to
@@ -57,7 +57,7 @@ public class PriceAlertManager {
                 /* Create and send notification */
                 NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                         .setContentTitle("Price Alert")
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(R.drawable.temp_circle)
                         .setContentText(price_alert.getName() + " is under " + price_alert.getTarget_price());
 
                 Intent resultIntent = new Intent(context, AlertListActivity.class);
@@ -85,7 +85,7 @@ public class PriceAlertManager {
      */
     public static boolean isBelowPrice(String price, String target){
         Log.i("COS", "PRICE IS: " + price  + " TARGET PRICE IS: " + target);
-        Double p = Double.parseDouble(price.substring(5));
+        Double p = Double.parseDouble(price);
         Double t = Double.parseDouble(target);
         return p <= t;
     }

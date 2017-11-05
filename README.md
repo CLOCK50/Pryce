@@ -1,7 +1,8 @@
 # Pryce #
 
 An app that notifies the user when a product they are tracking goes below or above a set price threshold. 
-The user can add specific products, or track entire categories likes Laptops for example.
+The user can add specific products, or track entire categories like Laptops for example. They can monitor
+price fluctuations and other logistics about the product.
 
 # Demo #
 

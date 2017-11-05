@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "920343210578",
+    "firebase_url": "https://pryce-master.firebaseio.com",
+    "project_id": "pryce-master",
+    "storage_bucket": "pryce-master.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920343210578:android:b4ba810c4b442d84",
+        "android_client_info": {
+          "package_name": "com.clock50.pryce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920343210578-f2125qvh5r8jl5ahqtn3e1nismacdpib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCYMOstFYFzV_EsisY1hSWu37C6TNGUiA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
